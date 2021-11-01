@@ -9,6 +9,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import Restaurant from './components/Restaurant.vue'
 import MdModalDialog from 'vue-material-modal-dialog'
 import AjouterRest from './components/AjouterRest.vue'
+import Acceuil from './components/Acceuil'
 
 export const dialog = new Vue()
 
@@ -24,6 +25,10 @@ const router=new VueRouter({
     {
       path: '/',
       component: ListeDesRestaurants
+    },
+    {
+      path: '/acceuil',
+      component: Acceuil
     },
     {
       path: '/hello',
