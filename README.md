@@ -1,5 +1,7 @@
 # Projet Web "The court food"
+
 Ce projet s'inscrit dans le cadre du module Technologie Web,il s'agit d'un site web de restaurants.
+Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
 ## Table de matiéres
 * [Pré-requis](#Pré-requis)
 * [Deploiement](#Deploiement)
@@ -66,16 +68,16 @@ Le systéme permet d'effectuer une recherche d'un nom d'un restaurant. L'utilisa
  La balise suivante de "VueMaterial" permet d'afficher le message mis en description dans le cas où la table est vide(le restaurant n'existe pas).
  `<md-table-empty-state
         md-label="Restaurant non existant"
-        :md-description="`Aucun restaurant ne correspond à votre recherche pour '${nomRestRech}'. Réessayez avec un autre nom.`">`
+        :md-description="Aucun restaurant ne correspond à votre recherche pour ${nomRestRech}. Réessayez avec un autre nom."> `
 
 ### Modifier un restaurant
 Le systeme permet à l'utilisateur de modifier les informations d'un restaurant existant par le biais d'un formulaire dont les champs contiennent les informations saisies au préalable. Une fois la modification effectuée,un popup box (SwwetAlert2) s'affiche ,indiquant que l'opération a été réalisée avec succés.
 
 ### Details d'un restaurant
 Il existe sur chaque ligne de la table un icone qui,lorqu'il est appuyé, permet de visualiser les informations détaillées du restaurant.Cet icone permet de renvoyer vers un autre component appelé 'Restaurant.vue' en récupérant l'id du restaurant en question. La balise `<router-link :to ="'/restaurant/'+ item._id"> ` renvoit vers le component dont le path est '/restaurant/:id' et effectivement, on arrive à voir l'id sur le path du component lorsqu'on appuie sur l'icone.Une autre interface s'ouvre ainsi affichant les détails de ce restaurant.
- ` ###### Carte Map` 
+###### * Carte Map
   On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupére et affiche la position du restaurant sur la carte.
- `###### Image au hasard `
+ ###### * Image au hasard
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.
 
 
