@@ -1,6 +1,6 @@
 # Projet Web "The court food"
 
-Ce projet s'inscrit dans le cadre du module Technologie Web,il s'agit d'un site web de restaurants.
+Ce projet s'inscrit dans le cadre du module Technologie Web,il s'agit d'un site web de restaurants.  
 Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
 ## Table de matiéres
 * [Pré-requis](#Pré-requis)
