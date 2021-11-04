@@ -18,19 +18,19 @@ Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
 ## Deploiement
  Faire git clone de notre repository
  Se placer dans le dossier et taper "code ." pour oouvrir le dossier dans VScode
- Ouvrir deux terminaux parallélement
-* ##### terminal 1 bash et lancer les commandes suivantes:
+ Ouvrir deux terminaux parallèlement
+* ##### Terminal 1 bash et lancer les commandes suivantes:
  1.  cd serveur
  2.  npm install
  3. node serverCrudWithMongo.js
-* ##### terminal 2 bash et lancer les commandes suivantes:
+* ##### Terminal 2 bash et lancer les commandes suivantes:
  1.  cd client
  2.  npm install
  3.  npm run serve
 * Lancer mongodb sur votre machine en saisissant "mongod" 
 
 ## Technologies
-Afin de mener à bien ce projet,nous avons fait appel aux bibliothéques suivantes:
+Afin de mener à bien ce projet,nous avons fait appel aux bibliothèques suivantes:
 * [VueMaterial](https://www.creative-tim.com/vuematerial/)
 * [Bootstrap](https://bootstrap-vue.org/docs)
 * [Leaflet](https://www.datavis.fr/index.php?page=leaflet-firstmap)
@@ -53,7 +53,7 @@ Le contenu de ce component s'affiche lorqu'on appuie sur l'icone 'edit',qui exis
 
 
 ## Fonctionnalités livrées
- Le systéme réalise l'ensemble des fonctionnalités suivantes:
+ Le système réalise l'ensemble des fonctionnalités suivantes:
 * Ajouter un restaurant
 * [Modifier un restaurant](#Modifier-un-restaurant)
 * Supprimer un restaurant
@@ -64,7 +64,7 @@ Le contenu de ce component s'affiche lorqu'on appuie sur l'icone 'edit',qui exis
 * [Visualiser les détails d'un restaurant avec son image et sa localisation sur GoogleMap](#Details-d'un-restaurant)
  
 ### Chercher un restaurant
-Le systéme permet d'effectuer une recherche d'un nom d'un restaurant. L'utilisateur saisit le nom du restaurant qu'il souhaite chercher et le systeme affiche ce dernier s'il existe. Le cas contraire,il affiche un message disant qu'aucun restaurant ne correspond à cette recherche. 
+Le système permet d'effectuer une recherche d'un nom d'un restaurant. L'utilisateur saisit le nom du restaurant qu'il souhaite chercher et le systeme affiche ce dernier s'il existe. Le cas contraire,il affiche un message disant qu'aucun restaurant ne correspond à cette recherche. 
  La balise suivante de "VueMaterial" permet d'afficher le message mis en description dans le cas où la table est vide(le restaurant n'existe pas).  
  `<md-table-empty-state
         md-label="Restaurant non existant"
@@ -76,7 +76,7 @@ Le systeme permet à l'utilisateur de modifier les informations d'un restaurant 
 ### Details d'un restaurant
 Il existe sur chaque ligne de la table un icone qui,lorqu'il est appuyé, permet de visualiser les informations détaillées du restaurant.Cet icone permet de renvoyer vers un autre component appelé 'Restaurant.vue' en récupérant l'id du restaurant en question. La balise `<router-link :to ="'/restaurant/'+ item._id"> ` renvoit vers le component dont le path est '/restaurant/:id' et effectivement, on arrive à voir l'id sur le path du component lorsqu'on appuie sur l'icone.Une autre interface s'ouvre ainsi affichant les détails de ce restaurant.
 * **Carte Map**   
-  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupére et affiche la position du restaurant sur la carte.
+  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
 * **Image au hasard**    
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.
 
