@@ -10,8 +10,8 @@ Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
 * [Fonctionnaités livrées](#Fonctionnalités-livrées)
 
 ## Pré-requis
-* [node.js](https://nodejs.org/en/)
-* [vue.js](https://vuejs.org/v2/guide/installation.html)
+* [Node.js](https://nodejs.org/en/)
+* [Vue.js](https://vuejs.org/v2/guide/installation.html)
 * [MongoDB](https://docs.mongodb.com/manual/installation/)
 
 
