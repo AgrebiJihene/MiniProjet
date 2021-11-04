@@ -1,18 +1,16 @@
 <template>
-  <div class="acceuil">
-    <button  @click=prev() type="button" class="btn btn-left">
-      <img src="../assets/chevron-left.svg" alt="" class="icone" />
-    </button>
-    <div class="container-slides" :style="{transform: `translateX(${index}px)`, transition: `${transition}`}">
-      <img src="../assets/ph1.jpg" alt="" class="img-slider" />
-      <img src="../assets/ph2.jpg" alt="" class="img-slider" />
-      <img src="../assets/ph3.jpg" alt="" class="img-slider" />
-    </div>
+  <div id="acceuil" :style="{'background-image': 'url(' + require('../assets/123.jpg') + ')'}">
+  <div id="titre">
+    <h1>The food court</h1>
+<blockquote> De la rigeur, de la passion et de l’amour du travail...</blockquote>
+<mark><router-link  class="r" to="/restaurants">Découvrez nos restaurants</router-link><md-icon>navigate_next</md-icon>  </mark></div>
 
-    <button @click=next() type="button" class="btn btn-right">
-      <img src="../assets/chevron-right.svg" alt="" class="icone" />
-    </button>
+ 
+
   </div>
+
+
+  
 </template>
 
 <script>
@@ -20,81 +18,65 @@ export default {
   name: "Acceuil",
   data: function () {
     return {
-      index: 0,
-      transition: "transform 0.2s ease"
+      
     };
   },
   methods: {
-    next() {
-        console.log(this.index)
-      if (this.index === -1500) {
-          this.transition="none" // on n'a pas une transition à la fin
-        this.index = 0;
-      } else {
-          this.transition="transform 0.2s ease"
-        this.index -= 500;
-      }
-    },
+  
 
-    prev(){
- if (this.index === 0) {
-          this.transition="none" 
-        this.index = -1500;
-      } else {
-          this.transition="transform 0.2s ease"
-        this.index += 500;
-      }
-
-    }
+ 
   },
 };
 </script>
 
 
 <style scoped>
-.acceuil {
-  
-  overflow: hidden;
-  position: relative;
+#titre{
+   padding-top: 200px;
+
+}
+#acceuil{
+    height: 655px;
+       /* background-repeat: no-repeat;*/
+        margin-top: 0px;
+        margin-right: 20px;
+
+}
+h1{
+ text-align: center;
+ color: rgb(172, 187, 116);
+ padding-bottom: 30px;
+ text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+ font-size: 60px;
 }
 
-.container-slides {
-  display: flex;
+
+blockquote
+{
+  font-style:normal;
+  margin-left:32px;
+  font-family:"Segoe Print", "Times New Roman", Verdana;
+ text-align: center;
+  background-repeat:no-repeat;
+  min-height: 30px;  
+  font-size: 30px;
+  color: rgb(214, 114, 83);
+   padding-bottom: 20px;
+   font-weight: bold;
+
 }
 
-.img-slider {
-  width: 100%;
-  height: auto;
-}
+mark{
+    font-style:normal;
 
-.btn {
-  outline: none;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  z-index: 1000;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  color: brown;
+    background-color: rgb(195, 202, 180);
+      font-size: 22px;
+  margin-left: 750px;
+  margin-bottom: 500px;
+  text-decoration: none;
 
-.icone {
-  width: 15px;
-}
 
-.btn-left {
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-}
 
-.btn-right {
-  top: 50%;
-  right: 5px;
-  transform: translateY(-50%);
 }
 </style>

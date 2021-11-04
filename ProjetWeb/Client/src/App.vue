@@ -4,52 +4,46 @@
   <router-link to="/restaurant"> [Detail d'un Restaurant] </router-link>
     <router-link to="/hello"> [HelloWorld] </router-link>
 -->
-       
 
-    <md-app>
+    <md-app id="background">
       <md-app-toolbar class="md-primary">
-        <img src="https://img.icons8.com/clouds/100/000000/restaurant.png"/> <span id="titre">The food court</span>
+        <img src="./assets/restaurant-vegetarien.png" /> &nbsp; &nbsp;<span
+          id="titre"
+          >The food court</span
+        >
       </md-app-toolbar>
 
       <md-app-drawer md-permanent="card">
         <md-list>
           <md-list-item>
-            <md-icon>home</md-icon>
-            <span class="md-list-item-text" 
-              ><router-link  class="r" to="/"> Acceuil </router-link></span
+            <md-icon :style="{color:'#978876'}">home</md-icon>
+            <span class="md-list-item-text"
+              ><router-link class="r" to="/" > Acceuil </router-link></span
             >
-
-            
           </md-list-item>
           <md-list-item>
-            <md-icon>restaurant</md-icon>
-            <span class="md-list-item-text"><router-link to="/Ajout">Ajouter restaurant</router-link></span>
-          </md-list-item>
-          <md-list-item>
-            <md-icon
-              ><span class="material-icons-outlined">
-                location_on
-              </span></md-icon
+            <md-icon  :style="{color:'#978876'}">restaurant</md-icon>
+            <span class="md-list-item-text"
+              ><router-link to="/restaurants"
+                >Nos restaurants</router-link
+              ></span
             >
-            <span class="md-list-item-text">Restaurant à proximité</span>
           </md-list-item>
-
           <md-list-item>
-            <md-icon>done</md-icon>
-            <span class="md-list-item-text">Trash</span>
+            <md-icon  :style="{color:'#978876'}">dinner_dining</md-icon>
+            <span class="md-list-item-text"
+              ><router-link to="/Ajout"
+                >Ajouter votre restaurant</router-link
+              ></span
+            >
           </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
-          </md-list-item>
+       
         </md-list>
       </md-app-drawer>
 
-      <md-app-content>
-             <router-view> </router-view>
-
-    </md-app-content>
+      <md-app-content id="back">
+        <router-view> </router-view>
+      </md-app-content>
     </md-app>
   </div>
 </template>
@@ -57,22 +51,20 @@
 <script>
 export default {
   name: "App",
-  components: {
-   
-  },
-
-  
+  components: {},
 };
 </script>
 
 <style lang="scss" scoped>
-#app {
-  font-family: 'Droid serif', serif;
-  font-size: 18px;
-
+#background {
+  // background: url("C:/Users/msi/Documents/GitHub/MiniProjet/ProjetWeb/Client/src/assets/back.jpg");
+  background-color: rgb(248, 244, 237);
+}
+#back {
+  background-color: rgb(248, 244, 237);
 }
 
-.r{
+.r {
   text-decoration: none;
   color: inherit;
 }
@@ -83,19 +75,12 @@ export default {
 }
 
 #titre {
-  color: black;
   font-size: 30px;
-  font-family: 'Droid serif', serif;
-  //text-decoration: wavy overline rgb(57, 61, 57);
+  font-family: "Droid serif", serif;
 
-text-shadow:   -1px -1px 0 #5a442d,  
-    1px -1px 0 #5a442d,
-    -1px 1px 0 #5a442d,
-     1px 1px 0 #5a442d;color:#fff;
-
-
-
-
+  text-shadow: -1px -1px 0 #5a442d, 1px -1px 0 #9e8569, -1px 1px 0 #5a442d,
+    1px 1px 0 #5a442d;
+  color: #fff;
 }
 
 @import "~vue-material/dist/theme/engine";
@@ -105,7 +90,8 @@ text-shadow:   -1px -1px 0 #5a442d,
   (
     primary: black,
     // The primary color of your applicatio
-    accent: md-get-palette-color(yellow, A200),
+    accent:rgb(192, 202, 156),
+   // accent:#978876,
     // The accent or secondary colo
   )
 );

@@ -2,16 +2,16 @@
   <div>
     <div id="titres">
       <h5 :style="{ color: 'rgb(214, 114, 83)' }">
-        <md-icon>horizontal_rule</md-icon> Ajout restaurant
-        <md-icon>add_circle_outline</md-icon>
+        <md-icon>horizontal_rule</md-icon> Modification restaurant
+        <md-icon>drive_file_rename_outline</md-icon>
         <md-icon>horizontal_rule</md-icon>
       </h5>
-      <h4>Vous pouvez publier votre restaurant</h4>
+      <h4>Vous pouvez modifier votre restaurant</h4>
       <p id="parag">
-        <mark>The food Court</mark> est incontournable pour les restaurants qui
-        souhaitent être visibles sur internet. <br />
-        Il est maintenant temps de remplir le formulaire avec les informations
-        du restaurant que vous souhaitez publier.
+        The food Court vous permet de signaler immédiatement tout changement de
+        situation. <br />
+        Il est maintenant temps de remplir le formulaire avec les modifications
+        du restaurant <mark> {{name }} </mark>.
       </p>
     </div>
 
@@ -24,31 +24,25 @@
             textDecoration: 'underline',
             fontSize: '16px',
           }"
-          >Rejoignez notre réseau </span
+          >Restez à jour</span
         ><md-icon> create</md-icon>
       </md-card-header>
 
       <md-card-content>
-        <form @submit.prevent="ajouterRestaurant($event)">
+        <form @submit.prevent="updateRestaurant(id, $event)">
           <!--On a utiliser bootstrap pour diviser le formulaire en deux parties (2 colonnes )-->
           <b-container class="bv-example-row">
             <b-row>
               <b-col>
                 <md-field>
                   <label>Nom </label>
-                  <md-input
-                    name="nom"
-                    type="text"
-                    required
-                    v-model="nom"
-                  ></md-input>
+                  <md-input name="name" type="text" v-model="name"></md-input>
                 </md-field>
                 <md-field>
                   <label>Batiment </label>
                   <md-input
                     name="building"
                     type="text"
-                    required
                     v-model="building"
                   ></md-input>
                 </md-field>
@@ -57,16 +51,16 @@
                   <md-input
                     name="borough"
                     type="text"
-                    required
                     v-model="borough"
                   ></md-input>
                 </md-field>
+
                 <md-field>
-                  <label>longitude</label>
+                  <label>Latitude</label>
                   <md-input
-                    name="longitude"
+                    name="latitude"
                     type="text"
-                    v-model="longitude"
+                    v-model="latitude"
                   ></md-input>
                 </md-field>
               </b-col>
@@ -77,11 +71,11 @@
                   <md-input
                     name="cuisine"
                     type="text"
-                    required
                     v-model="cuisine"
                   ></md-input>
                 </md-field>
 
+                
                 <md-field>
                   <label>Rue </label>
                   <md-input
@@ -100,19 +94,20 @@
                     v-model="zipcode"
                   ></md-input>
                 </md-field>
+
                 <md-field>
-                  <label>Latitude</label>
+                  <label>longitude</label>
                   <md-input
-                    name="latitude"
+                    name="longitude"
                     type="text"
-                    v-model="latitude"
+                    v-model="longitude"
                   ></md-input>
                 </md-field>
               </b-col>
 
               <b-col>
                 <img
-                  src="../assets/form.png"
+                  src="../assets/formmodif.png"
                   alt=""
                   :style="{ paddingLeft: '60px', height: '300px' }"
                 />
@@ -120,12 +115,110 @@
             </b-row>
           </b-container>
 
-          <button class="suivant">Ajouter</button>
+          <button class="suivant">Modifier</button>
         </form>
       </md-card-content>
     </md-card>
   </div>
 </template>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+export default {
+  name: "ModifRest",
+  props: {},
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+  },
+
+  data: function () {
+    return {
+      restaurant: null,
+
+      name: "",
+      cuisine: "",
+      borough: "",
+      building: "",
+      street: "",
+      zipcode: "",
+      latitude: "",
+      longitude: "",
+    };
+  },
+
+  mounted() {
+    console.log("Avant affichage, on pourra faire un fetch ..");
+    console.log("ID = " + this.id);
+    let url = "http://localhost:8080/api/restaurants/" + this.id;
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.restaurant.name);
+        this.restaurant = data.restaurant;
+        this.name = this.restaurant.name; //si l'utilis ne veut pas modifier le nom par exemple il n'est pas obligé de le reecrire
+        this.cuisine = this.restaurant.cuisine;
+        this.borough=this.restaurant.borough;
+        this.building=this.restaurant.address.building;
+        this.street=this.restaurant.address.street;
+        this.zipcode=this.restaurant.address.zipcode;
+        this.latitude=this.restaurant.address.coord[0];
+                this.longitude=this.restaurant.address.coord[1];
+
+      });
+  },
+  methods: {
+    updateRestaurant(id, event) {
+      let form = event.target;
+
+      // Récupération des valeurs des champs du formulaire
+      // en prévision d'un envoi multipart en ajax/fetch
+      let donneesFormulaire = new FormData(form);
+
+      let url = "http://localhost:8080/api/restaurants/" + id;
+
+      fetch(url, {
+        method: "PUT",
+        body: donneesFormulaire,
+      })
+        .then((responseJSON) => {
+          responseJSON.json().then((resJS) => {
+            // Maintenant resJS est un vrai objet JavaScript
+            console.log(resJS.msg);
+                alert(resJS.msg+"\nCliquer sur OK pour revenir à la liste des restaurants afin de vérifier vos modifications .");
+            this.$router.go(-1) // revenir en arriere en historique
+
+          });
+        })
+        .catch(function (err) {
+          console.log(err);
+          alert(err+"\nCliquer sur OK pour revenir à la liste des restaurants")
+                      this.$router.go(-1)
+
+        });
+
+      this.name = "";
+      this.cuisine = "";
+      this.borough = "";
+      this.building = "";
+      this.street = "";
+      this.zipcode = "";
+      this.latitude = "";
+      this.longitude = "";
+
+      
+
+    },
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #titres {
   text-align: center;
@@ -141,7 +234,7 @@ mark {
   background-image: linear-gradient(
     to right,
     rgba(61, 92, 35, 0.747),
-    rgba(130, 191, 231, 0.836) 4%,
+    rgba(231, 213, 130, 0.836) 4%,
     rgba(255, 245, 167, 0.3)
   );
   -webkit-box-decoration-break: clone;
@@ -155,7 +248,7 @@ mark {
 
 .suivant {
   overflow: hidden;
-  background-color: rgb(199, 228, 241);
+  background-color: rgb(221, 241, 199);
 
   font-size: 14px;
   font-weight: 500;
@@ -176,58 +269,4 @@ mark {
 }
 </style>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-export default {
-  name: "AjouterRest",
 
-  data: function () {
-    return {
-      nom: "",
-      cuisine: "",
-      borough: "",
-      building: "",
-      street: "",
-      zipcode: "",
-      latitude: "",
-      longitude: "",
-    };
-  },
-  methods: {
-    ajouterRestaurant(event) {
-      let form = event.target;
-
-      // Récupération des valeurs des champs du formulaire
-      // en prévision d'un envoi multipart en ajax/fetch
-      let donneesFormulaire = new FormData(form);
-
-      let url = "http://localhost:8080/api/restaurants";
-
-      fetch(url, {
-        method: "POST",
-        body: donneesFormulaire,
-      })
-        .then((responseJSON) => {
-          responseJSON.json().then((resJS) => {
-            // Maintenant resJS est un vrai objet JavaScript
-            console.log(resJS.msg);
-            alert(resJS.msg);
-          });
-        })
-        .catch(function (err) {
-          console.log(err);
-          alert(err);
-        });
-
-      this.nom = "";
-      this.cuisine = "";
-      this.borough = "";
-      this.building = "";
-      this.street = "";
-      this.zipcode = "";
-      this.latitude = "";
-      this.longitude = "";
-    },
-  },
-};
-</script>

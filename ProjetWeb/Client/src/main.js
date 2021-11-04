@@ -5,14 +5,22 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
-import HelloWorld from './components/HelloWorld.vue'
 import Restaurant from './components/Restaurant.vue'
 import MdModalDialog from 'vue-material-modal-dialog'
 import AjouterRest from './components/AjouterRest.vue'
 import Acceuil from './components/Acceuil'
+import ModifRest from './components/ModifRest'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import 'leaflet/dist/leaflet.css';
+
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
 export const dialog = new Vue()
-
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
@@ -23,28 +31,25 @@ Vue.use(MdModalDialog)
 const router=new VueRouter({
   routes: [ 
     {
-      path: '/',
+      path: '/restaurants',
       component: ListeDesRestaurants
     },
     {
-      path: '/acceuil',
+      path: '/',
       component: Acceuil
     },
+    
     {
-      path: '/hello',
-      component: HelloWorld,
-      props: {
-        msg: "Coucou la MIAGE !"
-      }
-
-    },
-    {
-      path: '/restaurant/:id',
+      path: '/restaurant/:id/:index',
       component: Restaurant
     },
     {
       path: '/Ajout',
       component:  AjouterRest
+    },
+    {
+      path: '/modif/:id',
+      component: ModifRest
     },
 
     
