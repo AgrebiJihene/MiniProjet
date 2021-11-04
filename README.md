@@ -37,27 +37,27 @@ Afin de mener à bien ce projet,nous avons fait appel aux bibliothéques suivant
 ## Components
 Nous avons 5 components dont les routes(paths) sont définies dans le fichier main.js.
 
-1. Acceuil.vue
+##### 1. Acceuil.vue
 C'est avec ce component que demarre le projet. Il s'agit d'une simple interface d'acceuil.
-2. ListeDesRestaurants.vue
+##### 2. ListeDesRestaurants.vue
 C'est le component fard du projet.Il intégre la majorité des fonctionnalités du systéme. 
 Notamment l'affichage de tous les restaurants,la suppression d'un restaurant ,la modification d'un restaurant ou encore sa recherche.
-3. Restaurant.vue
+##### 3. Restaurant.vue
 Le contenu de ce component s'affiche lorsqu'on appuie sur l'icone 'loop' d'un restaurant,qui existe sur chaque ligne de la table des restaurants.Il permet d'afficher l'ensemble des informations d'un restaurant telles que son nom,sa cuisine,sa ville son image et son emplacement sur une carte map.
-4. AjouterRest.vue
+##### 4. AjouterRest.vue
 Le contenu de ce component s'affiche lorqu'on appuie sur "Ajouter un restaurant" dans le menu à gauche. Il contient un formulaire dont les champs représentent les attributs de tout restaurant dans notre base de données telles que le nom, la cuisine, la latitude, la longitude etc..
-5. ModifRest.vue
+##### 5. ModifRest.vue
 Le contenu de ce component s'affiche lorqu'on appuie sur l'icone 'edit',qui existe sur chaque ligne de la table des restaurants. Il affiche un formulaire permettant à l'utilisateur de changer les informations d'un restaurant et de sauvegarder ces modifications dans la base des données.
 
 
 ## Fonctionnalités livrées
  Le systéme réalise l'ensemble des fonctionnalités suivantes:
-* [Ajouter un restaurant]
+* Ajouter un restaurant
 * [Modifier un restaurant](#Modifier-un-restaurant)
-* [Supprimer un restaurant]
-* [Lister tous les restaurants]
-* [Afficher le nombre des restaurants](total et par page)
-* [Dérouler les pages]
+* Supprimer un restaurant
+* Lister tous les restaurants
+* Afficher le nombre des restaurants(total et par page)
+* Dérouler les pages
 * [Chercher un restaurant](#Chercher-un-restaurant)
 * [Visualiser les détails d'un restaurant avec son image et sa localisation sur GoogleMap](#Details-d'un-restaurant)
  
@@ -77,5 +77,3 @@ Il existe sur chaque ligne de la table un icone qui,lorqu'il est appuyé, permet
   On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupére et affiche la position du restaurant sur la carte.
  ###### Image au hasard
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.
-
-
