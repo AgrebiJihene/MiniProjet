@@ -19,11 +19,11 @@ Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
  Faire git clone de notre repository
  Se placer dans le dossier et taper "code ." pour oouvrir le dossier dans VScode
  Ouvrir deux terminaux parallélement
- ##### terminal 1 bash et lancer les commandes suivantes:
+* ##### terminal 1 bash et lancer les commandes suivantes:
  1.  cd serveur
  2.  npm install
  3. node serverCrudWithMongo.js
-##### terminal 2 bash et lancer les commandes suivantes:
+* ##### terminal 2 bash et lancer les commandes suivantes:
  1.  cd client
  2.  npm install
  3.  npm run serve
