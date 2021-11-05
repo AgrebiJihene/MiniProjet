@@ -27,7 +27,8 @@ Il est réalisé par Madame **AGREBI Jihene** et Madame **DRIDI Nour**.
  1.  `cd client`
  2.  `npm install`
  3.   `npm run serve`
-* Lancer mongodb sur votre machine en tapant `mongod `
+* Lancer mongodb sur votre machine en tapant `mongod `  
+Remarque: 
 
 ## Technologies
 Afin de mener à bien ce projet,nous avons fait appel aux bibliothèques suivantes:
@@ -98,4 +99,11 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
 ` 
  
  
- **Lien de notre petite vidéo** :
+ **Lien de notre petite vidéo youtube qui montre un aspect remarquable de notre projet** :  
+ (https://youtu.be/cmZMTskogzk)
+  
+
+
+**Lien d'une vidéo démonstrative des fonctionnalités de projet** :  
+ <img src="https://youtu.be/ajPPclwajE0"/>
+

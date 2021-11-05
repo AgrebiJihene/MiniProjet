@@ -90,8 +90,8 @@ Icon.Default.mergeOptions({
 
 const GoogleImages = require("google-images");
 const client = new GoogleImages(
-  "91d9906382bc54f03",
-  "AIzaSyDV3eAR34hOqJujavYh7XSTfHTGBl0noHg"
+  "90612c01877c84eb4",
+  "AIzaSyA8u0KsoKjyFIdnd-xHWKBlE5NtkfnyyDs"
 );
 
 export default {
@@ -168,15 +168,15 @@ export default {
     },
     async ChercherImage() {
       window.setImmediate = window.setTimeout;
-      // si on n'a pas le parametre page c'est par defaut 1, ça nous envoie un tableau images qui contient les 10 premieres images dans la page 1
-      // Et la page 2 a les 10 prochains restau etc..
+      // si on n'a pas le parametre page c'est par defaut 1, ça nous envoie un tableau qui contient les 10 premiers resultats dans la page 1
+      // Et la page 2 a le prochain ensemble de 10, etc..
       //on a utilisé la fct getRandom(max) pour generer des nombres au hasard pour avoir des images differentes à chaque fois
       // ici pour le parametre page on a choisi les nombres entre 1 et 20 au hasard
       // Mais pour images[this.getRandom(10)] il faut avoir un nbre entre 0 et 9 puisque images est un tableau de 10 elements
       await client
         .search("RESTAURANT", { page: this.getRandom(20) + 1 })
         .then((images) => {
-          this.urlImg = images[this.getRandom(10)].url; //
+          this.urlImg = images[this.getRandom(10)].url; 
           console.log(images);
 
           console.log("URL " + this.urlImg);
