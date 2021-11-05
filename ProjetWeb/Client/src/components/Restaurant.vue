@@ -1,7 +1,7 @@
 <template>
   <div class="page-container md-layout-row">
     <md-app>
-      <md-app-toolbar class="md-primary" md-elevation="0">
+      <md-app-toolbar :style="{backgroundColor:'#e2e1d4e3',color:'white'}" md-elevation="0">
         <h3>&bigstar;&bigstar;&bigstar;</h3>
         <span class="md-title" :style="{ color: 'rgb(129, 112, 89)' }">
           {{ name }}

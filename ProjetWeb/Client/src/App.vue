@@ -6,7 +6,7 @@
 -->
 
     <md-app id="background">
-      <md-app-toolbar class="md-primary">
+      <md-app-toolbar :style="{backgroundColor:'#e2e1d4e3'}">
         <img src="./assets/restaurant-vegetarien.png" /> &nbsp; &nbsp;<span
           id="titre"
           >The food court</span
@@ -89,6 +89,7 @@ export default {
   "default",
   (
     primary: black,
+    
     // The primary color of your applicatio
     accent:rgb(192, 202, 156),
    // accent:#978876,
