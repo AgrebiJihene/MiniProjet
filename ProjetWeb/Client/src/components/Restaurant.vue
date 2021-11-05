@@ -26,6 +26,11 @@
               <!--
 
   MAPPPPPPPPPPPPPPPPPPPP
+
+                      <span :style="{ fontWeight: 'bold' }"
+                      ><md-icon>push_pin </md-icon> Coordonnées GPS: </span
+                    >{{ restaurant.address.coord }}
+                    <br />
 -->
 
               <md-card>
@@ -34,10 +39,11 @@
                     <span :style="{ fontWeight: 'bold' }"><md-icon>location_on </md-icon> Adresse: </span>
                     {{ building }} {{ street }}, {{ zipcode }} {{ borough }}
                     <br> <br>
-                    <span :style="{ fontWeight: 'bold' }"
+                     <span :style="{ fontWeight: 'bold' }"
                       ><md-icon>push_pin </md-icon> Coordonnées GPS: </span
                     >{{ restaurant.address.coord }}
                     <br />
+
                   </p>
 
                   <l-map
@@ -47,7 +53,7 @@
                   >
                     <l-tile-layer
                       :url="url"
-                      :attribution="attribution"
+                     
                     ></l-tile-layer>
                     <l-marker :lat-lng="[restaurant.address.coord[1],restaurant.address.coord[0]]"></l-marker>
                   </l-map>
@@ -57,14 +63,17 @@
 
             <b-col>
               <!--IMAAAAAAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE   
-               <img :src='img' alt="">
+               
 
- 
+   <img :src='img' alt="">
               
+                         <img width="500" height="600" :src="urlImg" />
+ 
               -->
-            <img :src='image' alt="">
-         
-           
+            
+          
+         <img :src='image'  alt="">
+
             
             </b-col>
           </b-row>
@@ -94,6 +103,13 @@ Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+const GoogleImages = require("google-images");
+const client = new GoogleImages(
+  "bdb3c367ae547443f",
+  "AIzaSyDEAulcUr0fZU1RcoqHTT-ZUJlr3KZu8sg"
+
+);
+
 export default {
   name: "Restaurant",
   props: {},
@@ -113,19 +129,22 @@ export default {
       zipcode: "",
       street: "",
      
-      //image:"https://loremflickr.com/1600/900/restaurant,"+ this.$route.params.id,
-      image:"https://loremflickr.com/1600/900/food,restaurant,"+ this.$route.params.index,
+     
+      image:"https://source.unsplash.com/1600x900/?restaurant,"+ this.$route.params.id,
+     
 
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       zoom: 15,
 
-      attribution:
-        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 
+ 
 
         img:'',
        accesKey:'VYXJ7X--uYDb8jRF8Ll3zmqdJw9sRYwktMiKLHt39NQ',
-       urll:'https://api.unsplash.com/photos/random'
+       urll:'https://api.unsplash.com/photos/random',
+
+
+        urlImg: null,
     };
   },
 
@@ -149,6 +168,8 @@ export default {
         this.building = this.restaurant.address.building;
         this.zipcode = this.restaurant.address.zipcode;
         this.street = this.restaurant.address.street;
+
+      
       
       });
   },
@@ -158,6 +179,17 @@ export default {
     LMarker,
   },
   methods: {
+   async searchImage() {
+      if (this.urlImg === null || this.urlImg === "null") {
+        window.setImmediate = window.setTimeout;
+        await client.search('restaurant'+ this.nom).then((images) => {
+          this.urlImg = images[0].url;
+        });
+      
+      }
+    },
+
+
  fetchRandomPhoto(){
         fetch(this.urll + `?client_id=${this.accesKey}`)
           .then(response => response.json())
@@ -242,5 +274,14 @@ mark {
 
 a:hover {
   background-color: rgb(210, 226, 179);
+}
+
+img{
+  width:500px;
+  height:350px;
+  margin-top:55px;
+  margin-left: 20px;
+  border-radius: 30px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
 }
 </style>

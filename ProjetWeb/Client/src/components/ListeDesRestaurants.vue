@@ -54,7 +54,7 @@
     <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" id="tab">
       <md-table-row id="head"> </md-table-row>
 
-      <md-table-row slot="md-table-row" slot-scope="{ item,index}">
+      <md-table-row slot="md-table-row" slot-scope="{ item}">
 
         <md-table-cell md-label="Name" md-sort-by="name">{{
           item.name
@@ -69,7 +69,7 @@
        
 
         <md-table-cell md-label="Actions">
-          <router-link :to="'/restaurant/' + item._id +'/'+index">
+          <router-link :to="'/restaurant/' + item._id">
             <md-icon>loupe</md-icon>
           </router-link>
           &nbsp;
@@ -121,6 +121,7 @@
     </div>
   </div>
 </template>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 import _ from "lodash";
@@ -201,13 +202,16 @@ export default {
           responseJSON.json().then((resJS) => {
             // Maintenant resJS est un vrai objet JavaScript
             console.log(resJS.msg);
+        alert(resJS.msg);
 
             //on rafraichit la vue
             this.getRestaurantsFromServer();
+            
           });
         })
         .catch(function (err) {
           console.log(err);
+              alert(err);
         });
     },
   },
