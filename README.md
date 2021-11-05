@@ -65,18 +65,18 @@ Le contenu de ce component s'affiche lorqu'on appuie sur l'icone 'edit',qui exis
  
 ### Chercher un restaurant
 Le système permet d'effectuer une recherche d'un nom d'un restaurant. L'utilisateur saisit le nom du restaurant qu'il souhaite chercher et le système affiche ce dernier s'il existe. Le cas contraire,il affiche un message disant qu'aucun restaurant ne correspond à cette recherche. 
- La balise suivante de "VueMaterial" permet d'afficher le message mis en description dans le cas où la table est vide(le restaurant n'existe pas).  
+ La balise suivante de **VueMaterial** permet d'afficher le message mis en description dans le cas où la table est vide(le restaurant n'existe pas).  
  `<md-table-empty-state
         md-label="Restaurant non existant"
         :md-description="Aucun restaurant ne correspond à votre recherche pour ${nomRestRech}. Réessayez avec un autre nom."> `
 
 ### Modifier un restaurant
-Le systeme permet à l'utilisateur de modifier les informations d'un restaurant existant par le biais d'un formulaire dont les champs contiennent les informations saisies au préalable. Une fois la modification effectuée,un popup box (SwwetAlert2) s'affiche ,indiquant que l'opération a été réalisée avec succés.
+Le systeme permet à l'utilisateur de modifier les informations d'un restaurant existant par le biais d'un formulaire dont les champs contiennent les informations saisies au préalable. Une fois la modification effectuée,un popup box **(SwwetAlert2)** s'affiche ,indiquant que l'opération a été réalisée avec succés.
 
 ### Details d'un restaurant
 Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, permet de visualiser les informations détaillées du restaurant.Cette icone permet de renvoyer vers un autre component appelé 'Restaurant.vue' en récupérant l'id du restaurant en question. La balise `<router-link :to ="'/restaurant/'+ item._id"> ` renvoit vers le component dont le path est '/restaurant/:id' et effectivement, on arrive à voir l'id sur le path du component lorsqu'on appuie sur l'icone.Une autre interface s'ouvre ainsi affichant les détails de ce restaurant.
 * **Carte Map**   
-  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothèque "Vue 2 Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déjà les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
+  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothèque **Vue 2 Leaflet** qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déjà les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
 * **Image au hasard**    
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.
 
