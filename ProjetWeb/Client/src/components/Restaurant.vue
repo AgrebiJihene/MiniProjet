@@ -23,60 +23,43 @@
 
           <b-row>
             <b-col>
-              <!--
-
-  MAPPPPPPPPPPPPPPPPPPPP
-
-                      <span :style="{ fontWeight: 'bold' }"
-                      ><md-icon>push_pin </md-icon> Coordonnées GPS: </span
-                    >{{ restaurant.address.coord }}
-                    <br />
--->
-
               <md-card>
                 <md-card-content>
                   <p id="info">
-                    <span :style="{ fontWeight: 'bold' }"><md-icon>location_on </md-icon> Adresse: </span>
+                    <span :style="{ fontWeight: 'bold' }"
+                      ><md-icon>location_on </md-icon> Adresse:
+                    </span>
                     {{ building }} {{ street }}, {{ zipcode }} {{ borough }}
-                    <br> <br>
-                     <span :style="{ fontWeight: 'bold' }"
+                    <br />
+                    <br />
+                    <span :style="{ fontWeight: 'bold' }"
                       ><md-icon>push_pin </md-icon> Coordonnées GPS: </span
                     >{{ restaurant.address.coord }}
                     <br />
-
                   </p>
 
                   <l-map
                     style="height: 350px"
                     :zoom="zoom"
-                    :center="[restaurant.address.coord[1],restaurant.address.coord[0]]"
+                    :center="[
+                      restaurant.address.coord[1],
+                      restaurant.address.coord[0],
+                    ]"
                   >
-                    <l-tile-layer
-                      :url="url"
-                     
-                    ></l-tile-layer>
-                    <l-marker :lat-lng="[restaurant.address.coord[1],restaurant.address.coord[0]]"></l-marker>
+                    <l-tile-layer :url="url"></l-tile-layer>
+                    <l-marker
+                      :lat-lng="[
+                        restaurant.address.coord[1],
+                        restaurant.address.coord[0],
+                      ]"
+                    ></l-marker>
                   </l-map>
                 </md-card-content>
               </md-card>
             </b-col>
 
             <b-col>
-              <!--IMAAAAAAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE   
-               
-
-  
-
-        <img :src='image'  alt="">
-              
-                        
- 
-              -->
-            
-          
-     <img width="500" height="600" :src="urlImg" />
-
-            
+              <img width="500" height="600" :src="urlImg" />
             </b-col>
           </b-row>
 
@@ -109,7 +92,6 @@ const GoogleImages = require("google-images");
 const client = new GoogleImages(
   "91d9906382bc54f03",
   "AIzaSyDV3eAR34hOqJujavYh7XSTfHTGBl0noHg"
-
 );
 
 export default {
@@ -120,7 +102,7 @@ export default {
       return this.$route.params.id;
     },
   },
- 
+
   data: function () {
     return {
       restaurant: null,
@@ -130,22 +112,14 @@ export default {
       building: "",
       zipcode: "",
       street: "",
-     
-     
-      image:"https://source.unsplash.com/1600x900/?restaurant,"+ this.$route.params.id,
-     
-
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       zoom: 15,
 
-        urlImg: null,
+      urlImg: null,
     };
   },
 
   mounted() {
-       
-
-
     console.log("Avant affichage, on pourra faire un fetch ..");
     console.log("ID = " + this.id);
     let url = "http://localhost:8080/api/restaurants/" + this.id;
@@ -154,8 +128,6 @@ export default {
         return response.json();
       })
       .then((data) => {
-           
-
         console.log(data.restaurant.name);
         this.restaurant = data.restaurant;
         this.name = this.restaurant.name;
@@ -164,14 +136,12 @@ export default {
         this.building = this.restaurant.address.building;
         this.zipcode = this.restaurant.address.zipcode;
         this.street = this.restaurant.address.street;
-        this.urlImg=this.restaurant.url;
+        this.urlImg = this.restaurant.url;
 
-       //console.log("NON API",this.urlImg)
-      
+        //console.log("NON API",this.urlImg)
       });
 
-      this.ChercherImage();
-     
+    this.ChercherImage();
   },
   components: {
     LMap,
@@ -179,7 +149,7 @@ export default {
     LMarker,
   },
   methods: {
-     AddUrl() {
+    AddUrl() {
       let data = new FormData();
       data.append("urlImg", this.urlImg);
       let url = "http://localhost:8080/api/restaurant/" + this.id;
@@ -189,42 +159,34 @@ export default {
       })
         .then((responseJSON) => {
           responseJSON.json().then((res) => {
-            console.log("URL AJOUTé, " + res.msg);
+            console.log("Url ajouté, " + res.msg);
           });
         })
         .catch((err) => {
           console.log(err);
         });
     },
-   async ChercherImage() {
+    async ChercherImage() {
+      window.setImmediate = window.setTimeout;
+      // si on n'a pas le parametre page c'est par defaut 1, ça nous envoie un tableau images qui contient les 10 premieres images dans la page 1
+      // Et la page 2 a les 10 prochains restau etc..
+      //on a utilisé la fct getRandom(max) pour generer des nombres au hasard pour avoir des images differentes à chaque fois
+      // ici pour le parametre page on a choisi les nombres entre 1 et 20 au hasard
+      // Mais pour images[this.getRandom(10)] il faut avoir un nbre entre 0 et 9 puisque images est un tableau de 10 elements
+      await client
+        .search("RESTAURANT", { page: this.getRandom(20) + 1 })
+        .then((images) => {
+          this.urlImg = images[this.getRandom(10)].url; //
+          console.log(images);
 
-     
-        window.setImmediate = window.setTimeout;
-        // si on n'a pas le parametre page c'est par defaut 1, ça nous envoie un tableau images qui contient les 10 premieres images dans la page 1
-        // Et la page 2 a les 10 prochains restau etc..
-        //on a utilisé la fct getRandom(max) pour generer des nombres au hasard pour avoir des images differentes à chaque fois
-        // ici pour le parametre page on a choisi les nombres entre 1 et 20 au hasard 
-        // Mais pour images[this.getRandom(10)] il faut avoir un nbre entre 0 et 9 puisque images est un tableau de 10 elements
-        await client.search('RESTAURANT',{page:(this.getRandom(20)+1)}).then((images) => {
-          this.urlImg = images[this.getRandom(10)].url; // 
-          console.log(images)
-        
-
-          console.log("URL "+this.urlImg)
+          console.log("URL " + this.urlImg);
         });
-       this.AddUrl();
-     
-
-     
-      
+      this.AddUrl();
     },
-      // fct qui genere un nombre au hasard entre 0 et max
-      getRandom(max){
-        return Math.floor(Math.random() * max);
-      }
-
- 
-  
+    // fct qui genere un nombre au hasard entre 0 et max
+    getRandom(max) {
+      return Math.floor(Math.random() * max);
+    },
   },
 };
 </script>
@@ -300,10 +262,10 @@ a:hover {
   background-color: rgb(210, 226, 179);
 }
 
-img{
-  width:500px;
-  height:350px;
-  margin-top:55px;
+img {
+  width: 500px;
+  height: 350px;
+  margin-top: 55px;
   margin-left: 20px;
   border-radius: 30px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);

@@ -54,8 +54,7 @@
     <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" id="tab">
       <md-table-row id="head"> </md-table-row>
 
-      <md-table-row slot="md-table-row" slot-scope="{ item}">
-
+      <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Name" md-sort-by="name">{{
           item.name
         }}</md-table-cell>
@@ -66,8 +65,6 @@
           >{{ item.borough }}
         </md-table-cell>
 
-       
-
         <md-table-cell md-label="Actions">
           <router-link :to="'/restaurant/' + item._id">
             <md-icon>loupe</md-icon>
@@ -77,11 +74,10 @@
             <md-icon>delete</md-icon>
           </a>
           &nbsp;
-          <router-link :to="'/modif/' + item._id ">
+          <router-link :to="'/modif/' + item._id">
             <md-icon>edit</md-icon>
           </router-link>
         </md-table-cell>
-
       </md-table-row>
 
       <md-table-empty-state
@@ -139,11 +135,6 @@ export default {
       nbPagesTotal: 0,
       nomRestauRecherche: "",
       showDialog: false,
-    
-     
-      
-   
-      
     };
   },
   mounted() {
@@ -181,8 +172,6 @@ export default {
             this.nbPagesTotal = Math.round(
               this.nbRestaurantsTotal / this.pagesize
             );
-
-            
           });
         })
         .catch(function (err) {
@@ -202,16 +191,15 @@ export default {
           responseJSON.json().then((resJS) => {
             // Maintenant resJS est un vrai objet JavaScript
             console.log(resJS.msg);
-        alert(resJS.msg);
+            alert(resJS.msg);
 
             //on rafraichit la vue
             this.getRestaurantsFromServer();
-            
           });
         })
         .catch(function (err) {
           console.log(err);
-              alert(err);
+          alert(err);
         });
     },
   },

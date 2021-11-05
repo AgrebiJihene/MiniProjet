@@ -130,29 +130,29 @@ exports.createRestaurant = async (formData) => {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });
 	let db = client.db(dbName);
 	let reponse;
-	
+
 	try {
 		let toInsert = {
 			name: formData.nom,
 			cuisine: formData.cuisine,
 			borough: formData.borough,
-			address:{
-				building:formData.building,
-				street:formData.street,
-				zipcode:formData.zipcode,
-				coord:[
-					
+			address: {
+				building: formData.building,
+				street: formData.street,
+				zipcode: formData.zipcode,
+				coord: [
+
 					parseFloat(formData.longitude),
 					parseFloat(formData.latitude)
 				]
 			},
-			
 
-			
+
+
 
 		};
 		let data = await db.collection("restaurants").insertOne(toInsert);
-		
+
 		reponse = {
 			succes: true,
 			result: toInsert._id,
@@ -181,20 +181,20 @@ exports.updateRestaurant = async (id, formData) => {
 			$set: {
 
 
-					name: formData.name,
-					cuisine: formData.cuisine,
-					borough: formData.borough,
-				address:{
-					building:formData.building,
-					street:formData.street,
-					zipcode:formData.zipcode,
-					coord:[
+				name: formData.name,
+				cuisine: formData.cuisine,
+				borough: formData.borough,
+				address: {
+					building: formData.building,
+					street: formData.street,
+					zipcode: formData.zipcode,
+					coord: [
 						parseFloat(formData.latitude),
 						parseFloat(formData.longitude)
 					],
-				
-				
-			},
+
+
+				},
 			}
 		};
 		let result = await db.collection("restaurants").updateOne(myquery, newvalues);
@@ -203,7 +203,7 @@ exports.updateRestaurant = async (id, formData) => {
 			succes: true,
 			result: result,
 			error: null,
-			msg: "Modification réussie !" 
+			msg: "Modification réussie !"
 		};
 	} catch (err) {
 		reponse = {
@@ -222,7 +222,7 @@ exports.updateRestaurant = async (id, formData) => {
 
 
 //Modification de l'url de l'image d'un restau
-exports.updateURL= async (id, formData) => {
+exports.updateURL = async (id, formData) => {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });
 	let db = client.db(dbName);
 	let reponse;
@@ -231,7 +231,7 @@ exports.updateURL= async (id, formData) => {
 		let myquery = { "_id": ObjectId(id) };
 		let newvalues = {
 			$set: {
-			url: formData.urlImg
+				url: formData.urlImg
 			}
 		};
 		let result = await db.collection("restaurants").updateOne(myquery, newvalues);
@@ -240,7 +240,7 @@ exports.updateURL= async (id, formData) => {
 			succes: true,
 			result: result,
 			error: null,
-			msg: "Modification URL OK !" 
+			msg: "Modification URL OK !"
 		};
 	} catch (err) {
 		reponse = {

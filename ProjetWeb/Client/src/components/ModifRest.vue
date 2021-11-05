@@ -11,7 +11,7 @@
         The food Court vous permet de signaler immédiatement tout changement de
         situation. <br />
         Il est maintenant temps de remplir le formulaire avec les modifications
-        du restaurant <mark> {{name }} </mark>.
+        du restaurant <mark> {{ name }} </mark>.
       </p>
     </div>
 
@@ -75,7 +75,6 @@
                   ></md-input>
                 </md-field>
 
-                
                 <md-field>
                   <label>Rue </label>
                   <md-input
@@ -163,13 +162,12 @@ export default {
         this.restaurant = data.restaurant;
         this.name = this.restaurant.name; //si l'utilis ne veut pas modifier le nom par exemple il n'est pas obligé de le reecrire
         this.cuisine = this.restaurant.cuisine;
-        this.borough=this.restaurant.borough;
-        this.building=this.restaurant.address.building;
-        this.street=this.restaurant.address.street;
-        this.zipcode=this.restaurant.address.zipcode;
-        this.latitude=this.restaurant.address.coord[0];
-                this.longitude=this.restaurant.address.coord[1];
-
+        this.borough = this.restaurant.borough;
+        this.building = this.restaurant.address.building;
+        this.street = this.restaurant.address.street;
+        this.zipcode = this.restaurant.address.zipcode;
+        this.latitude = this.restaurant.address.coord[0];
+        this.longitude = this.restaurant.address.coord[1];
       });
   },
   methods: {
@@ -190,16 +188,19 @@ export default {
           responseJSON.json().then((resJS) => {
             // Maintenant resJS est un vrai objet JavaScript
             console.log(resJS.msg);
-                alert(resJS.msg+"\nCliquer sur OK pour revenir à la liste des restaurants afin de vérifier vos modifications .");
-            this.$router.go(-1) // revenir en arriere en historique
-
+            alert(
+              resJS.msg +
+                "\nCliquer sur OK pour revenir à la liste des restaurants afin de vérifier vos modifications ."
+            );
+            this.$router.go(-1); // revenir en arriere en historique
           });
         })
         .catch(function (err) {
           console.log(err);
-          alert(err+"\nCliquer sur OK pour revenir à la liste des restaurants")
-                      this.$router.go(-1)
-
+          alert(
+            err + "\nCliquer sur OK pour revenir à la liste des restaurants"
+          );
+          this.$router.go(-1);
         });
 
       this.name = "";
@@ -210,9 +211,6 @@ export default {
       this.zipcode = "";
       this.latitude = "";
       this.longitude = "";
-
-      
-
     },
   },
 };
