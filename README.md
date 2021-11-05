@@ -79,8 +79,8 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
   On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothèque **Vue 2 Leaflet** qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déjà les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
 * **Image au hasard**    
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.   
- 
- **Lien de notre vidéo de présentation du projet** :
+
+ **Lien de notre petite vidéo** :
 
 
 
