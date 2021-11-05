@@ -2,7 +2,7 @@
 
 Ce projet s'inscrit dans le cadre du module Technologie Web,il s'agit d'un site web de gestion des restaurants.  
 Il est réalisé par Madame **AGREBI Jihene** et Madame **DRIDI Nour**.
-## Table de matiéres
+## Table de matières
 * [Pré-requis](#Pré-requis)
 * [Deploiement](#Deploiement)
 * [Technologies](#Technologies)
@@ -16,8 +16,8 @@ Il est réalisé par Madame **AGREBI Jihene** et Madame **DRIDI Nour**.
 
 
 ## Deploiement
- Faire git clone de notre repository
- Se placer dans le dossier et taper "code ." pour ouvrir le dossier dans VScode
+ Faire git clone de notre repository  
+ Se placer dans le dossier et taper "code ." pour ouvrir le dossier dans VScode  
  Ouvrir deux terminaux parallèlement
 * ##### Terminal 1 bash et lancer les commandes suivantes:
  1.  cd serveur
@@ -78,7 +78,8 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
 * **Carte Map**   
   On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothèque **Vue 2 Leaflet** qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déjà les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
 * **Image au hasard**    
- L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.  
+ L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.   
+ 
  **Lien de notre vidéo de présentation du projet** :
 
 
