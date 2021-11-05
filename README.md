@@ -85,8 +85,7 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
  * **Image au hasard**  
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers l'API de **Google-images** qui génére aléatoirement une image différente à chaque restaurant. Son fonctionnement depend de deux variables:  
         **API KEY**: qui est la clé du projet qu'on crée dans Google Cloud Platform.    
-        **CSE** : qui est l'identifiant du moteur de recherche qu'on crée.  
-         
+        **CSE** : qui est l'identifiant du moteur de recherche qu'on crée.   
  A chaque chargement du détail d'un restaurant,une image aléatoire lui sera affectée. L'url de cette image sera stockée dans la base des données au sein d'un champs qu'on a crée et nommé :Url.(Afin d'eviter la surchage de l'API de Google-images qui n'autorise que quelques requetes par jour). Ceci est réalisé a travers une fonction implémentée dans ServerCrudWithMongo qui permet de modifier le champs url du restaurant en question.
 
 `app.put(/api/restaurant/:id, multerData.fields([]), (req, res) => {
