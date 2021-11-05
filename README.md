@@ -33,7 +33,7 @@ Il est réalisé par Madame AGREBI Jihene et Madame DRIDI Nour.
 Afin de mener à bien ce projet,nous avons fait appel aux bibliothèques suivantes:
 * [VueMaterial](https://www.creative-tim.com/vuematerial/)
 * [Bootstrap](https://bootstrap-vue.org/docs)
-* [Leaflet](https://www.datavis.fr/index.php?page=leaflet-firstmap)
+* [Vue 2 Leaflet](https://vue2-leaflet.netlify.app/)
 * [SweetAlert2](https://sweetalert2.github.io/)
 
 ## Components
@@ -76,7 +76,7 @@ Le systeme permet à l'utilisateur de modifier les informations d'un restaurant 
 ### Details d'un restaurant
 Il existe sur chaque ligne de la table un icone qui,lorqu'il est appuyé, permet de visualiser les informations détaillées du restaurant.Cet icone permet de renvoyer vers un autre component appelé 'Restaurant.vue' en récupérant l'id du restaurant en question. La balise `<router-link :to ="'/restaurant/'+ item._id"> ` renvoit vers le component dont le path est '/restaurant/:id' et effectivement, on arrive à voir l'id sur le path du component lorsqu'on appuie sur l'icone.Une autre interface s'ouvre ainsi affichant les détails de ce restaurant.
 * **Carte Map**   
-  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
+  On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothéque "Vue 2 Leaflet" qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déja les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
 * **Image au hasard**    
  L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.
 
