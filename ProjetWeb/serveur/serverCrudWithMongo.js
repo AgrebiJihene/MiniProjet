@@ -153,6 +153,19 @@ app.put('/api/restaurants/:id', multerData.fields([]), (req, res) => {
 		});
 });
 
+//Modification de l'url de l'image d'un restau
+
+app.put('/api/restaurant/:id', multerData.fields([]), (req, res) => {
+	var id = req.params.id;
+
+	mongoDBModule.updateURL(id, req.body)
+		.then(data => {
+			res.send(JSON.stringify(data));
+		});
+});
+
+
+
 // Suppression d'un restaurant
 // On fera la suppression par une requête http DELETE
 // c'est le standard REST

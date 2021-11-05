@@ -179,17 +179,21 @@ exports.updateRestaurant = async (id, formData) => {
 		let myquery = { "_id": ObjectId(id) };
 		let newvalues = {
 			$set: {
-				name: formData.name,
-				cuisine: formData.cuisine,
-				borough: formData.borough,
-			address:{
-				building:formData.building,
-				street:formData.street,
-				zipcode:formData.zipcode,
-				coord:[
-					parseFloat(formData.latitude),
-					parseFloat(formData.longitude)
-				]
+
+
+					name: formData.name,
+					cuisine: formData.cuisine,
+					borough: formData.borough,
+				address:{
+					building:formData.building,
+					street:formData.street,
+					zipcode:formData.zipcode,
+					coord:[
+						parseFloat(formData.latitude),
+						parseFloat(formData.longitude)
+					],
+				
+				
 			},
 			}
 		};
@@ -213,6 +217,44 @@ exports.updateRestaurant = async (id, formData) => {
 	}
 
 }
+
+
+
+
+//Modification de l'url de l'image d'un restau
+exports.updateURL= async (id, formData) => {
+	let client = await MongoClient.connect(url, { useNewUrlParser: true });
+	let db = client.db(dbName);
+	let reponse;
+
+	try {
+		let myquery = { "_id": ObjectId(id) };
+		let newvalues = {
+			$set: {
+			url: formData.urlImg
+			}
+		};
+		let result = await db.collection("restaurants").updateOne(myquery, newvalues);
+
+		reponse = {
+			succes: true,
+			result: result,
+			error: null,
+			msg: "Modification URL OK !" 
+		};
+	} catch (err) {
+		reponse = {
+			succes: false,
+			error: err,
+			msg: "Problème à la modification URL !"
+		};
+	} finally {
+		client.close();
+		return reponse;
+	}
+
+}
+
 
 exports.deleteRestaurant = async function (id, callback) {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });

@@ -17,17 +17,17 @@ Il est réalisé par Madame **AGREBI Jihene** et Madame **DRIDI Nour**.
 
 ## Deploiement
  Faire git clone de notre repository  
- Se placer dans le dossier et taper "code ." pour ouvrir le dossier dans VScode  
+ Se placer dans le dossier et taper `code .` pour ouvrir le dossier dans VScode  
  Ouvrir deux terminaux parallèlement
 * ##### Terminal 1 bash et lancer les commandes suivantes:
- 1.  cd serveur
- 2.  npm install
- 3. node serverCrudWithMongo.js
+ 1.  `cd serveur`
+ 2.  `npm install`
+ 3. `node serverCrudWithMongo.js`
 * ##### Terminal 2 bash et lancer les commandes suivantes:
- 1.  cd client
- 2.  npm install
- 3.  npm run serve
-* Lancer mongodb sur votre machine en saisissant "mongod" 
+ 1.  `cd client`
+ 2.  `npm install`
+ 3.   `npm run serve`
+* Lancer mongodb sur votre machine en tapant `mongod `
 
 ## Technologies
 Afin de mener à bien ce projet,nous avons fait appel aux bibliothèques suivantes:
@@ -35,6 +35,9 @@ Afin de mener à bien ce projet,nous avons fait appel aux bibliothèques suivant
 * [Bootstrap](https://bootstrap-vue.org/docs)
 * [Vue 2 Leaflet](https://vue2-leaflet.netlify.app/)
 * [SweetAlert2](https://sweetalert2.github.io/)
+* [Google Image](https://www.npmjs.com/package/google-images)
+
+
 
 ## Components
 Nous avons 5 components dont les routes (paths) sont définies dans le fichier main.js.
@@ -77,13 +80,22 @@ Le systeme permet à l'utilisateur de modifier les informations d'un restaurant 
 Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, permet de visualiser les informations détaillées du restaurant.Cette icone permet de renvoyer vers un autre component appelé 'Restaurant.vue' en récupérant l'id du restaurant en question. La balise `<router-link :to ="'/restaurant/'+ item._id"> ` renvoit vers le component dont le path est '/restaurant/:id' et effectivement, on arrive à voir l'id sur le path du component lorsqu'on appuie sur l'icone.Une autre interface s'ouvre ainsi affichant les détails de ce restaurant.
 * **Carte Map**   
   On retrouve au sein de cette interface l'emplacement du restaurant sur la carte map. Nous avons utilisé la bibliothèque **Vue 2 Leaflet** qui s'appuie sur les coordonnées du restaurant afin de le positionner.Ayant déjà les attributs Longitude et Latitude dans la base des données,l'API les récupère et affiche la position du restaurant sur la carte.
-* **Image au hasard**    
- L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers une API qui génére aléatoirement une image différente à chaque restaurant.   
 
+ * **Image au hasard**  
+ L'interface affiche également une image prise au hasard d'un restaurant. Ceci est réalisé à travers l'API de **Google-images** qui génére aléatoirement une image différente à chaque restaurant. Son fonctionnement depend de deux variables: 
+ * **API KEY**: qui est la clé du projet qu'on crée dans Google Cloud Platform.    
+ * **CSE** : Pour Custom Search Engine ,qui est l'identificateur du moteur de recherche qu'on crée.  
+ A chaque chargement du détail d'un restaurant,une image aléatoire lui sera affectée. L'url de cette image sera stockée dans la base des données au sein d'un champs qu'on a crée et nommé :Url.(Afin d'eviter la surchage de l'API de Google-images qui n'autorise que quelques requetes par jour). Ceci est réalisé a travers une fonction implémentée dans ServerCrudWithMongo qui permet de modifier le champs url du restaurant en question.
+
+`app.put('/api/restaurant/:id', multerData.fields([]), (req, res) => {
+    var id = req.params.id;
+
+    mongoDBModule.updateURL(id, req.body)
+        .then(data => {
+            res.send(JSON.stringify(data));
+        });
+});
+` 
+ 
+ 
  **Lien de notre petite vidéo** :
-
-
-
-
-
-

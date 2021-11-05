@@ -65,14 +65,16 @@
               <!--IMAAAAAAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE   
                
 
-   <img :src='img' alt="">
+  
+
+        <img :src='image'  alt="">
               
-                         <img width="500" height="600" :src="urlImg" />
+                        
  
               -->
             
           
-         <img :src='image'  alt="">
+     <img width="500" height="600" :src="urlImg" />
 
             
             </b-col>
@@ -105,8 +107,8 @@ Icon.Default.mergeOptions({
 
 const GoogleImages = require("google-images");
 const client = new GoogleImages(
-  "bdb3c367ae547443f",
-  "AIzaSyDEAulcUr0fZU1RcoqHTT-ZUJlr3KZu8sg"
+  "91d9906382bc54f03",
+  "AIzaSyDV3eAR34hOqJujavYh7XSTfHTGBl0noHg"
 
 );
 
@@ -136,20 +138,14 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       zoom: 15,
 
-
- 
-
-        img:'',
-       accesKey:'VYXJ7X--uYDb8jRF8Ll3zmqdJw9sRYwktMiKLHt39NQ',
-       urll:'https://api.unsplash.com/photos/random',
-
-
         urlImg: null,
     };
   },
 
   mounted() {
-  this.fetchRandomPhoto();
+       
+
+
     console.log("Avant affichage, on pourra faire un fetch ..");
     console.log("ID = " + this.id);
     let url = "http://localhost:8080/api/restaurants/" + this.id;
@@ -168,10 +164,14 @@ export default {
         this.building = this.restaurant.address.building;
         this.zipcode = this.restaurant.address.zipcode;
         this.street = this.restaurant.address.street;
+        this.urlImg=this.restaurant.url;
 
-      
+       //console.log("NON API",this.urlImg)
       
       });
+
+      this.ChercherImage();
+     
   },
   components: {
     LMap,
@@ -179,27 +179,51 @@ export default {
     LMarker,
   },
   methods: {
-   async searchImage() {
-      if (this.urlImg === null || this.urlImg === "null") {
-        window.setImmediate = window.setTimeout;
-        await client.search('restaurant'+ this.nom).then((images) => {
-          this.urlImg = images[0].url;
-        });
-      
-      }
-    },
-
-
- fetchRandomPhoto(){
-        fetch(this.urll + `?client_id=${this.accesKey}`)
-          .then(response => response.json())
-        .then((json)=>{
-          this.img=json.urls.full
-        }).
-        catch((err)=>{
-          console.log('error',err)
+     AddUrl() {
+      let data = new FormData();
+      data.append("urlImg", this.urlImg);
+      let url = "http://localhost:8080/api/restaurant/" + this.id;
+      fetch(url, {
+        method: "PUT",
+        body: data,
+      })
+        .then((responseJSON) => {
+          responseJSON.json().then((res) => {
+            console.log("URL AJOUTé, " + res.msg);
+          });
         })
-     }
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+   async ChercherImage() {
+
+     
+        window.setImmediate = window.setTimeout;
+        // si on n'a pas le parametre page c'est par defaut 1, ça nous envoie un tableau images qui contient les 10 premieres images dans la page 1
+        // Et la page 2 a les 10 prochains restau etc..
+        //on a utilisé la fct getRandom(max) pour generer des nombres au hasard pour avoir des images differentes à chaque fois
+        // ici pour le parametre page on a choisi les nombres entre 1 et 20 au hasard 
+        // Mais pour images[this.getRandom(10)] il faut avoir un nbre entre 0 et 9 puisque images est un tableau de 10 elements
+        await client.search('RESTAURANT',{page:(this.getRandom(20)+1)}).then((images) => {
+          this.urlImg = images[this.getRandom(10)].url; // 
+          console.log(images)
+        
+
+          console.log("URL "+this.urlImg)
+        });
+       this.AddUrl();
+     
+
+     
+      
+    },
+      // fct qui genere un nombre au hasard entre 0 et max
+      getRandom(max){
+        return Math.floor(Math.random() * max);
+      }
+
+ 
   
   },
 };
