@@ -88,7 +88,7 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
  * **CSE** : Pour Custom Search Engine ,qui est l'identificateur du moteur de recherche qu'on crée.  
  A chaque chargement du détail d'un restaurant,une image aléatoire lui sera affectée. L'url de cette image sera stockée dans la base des données au sein d'un champs qu'on a crée et nommé :Url.(Afin d'eviter la surchage de l'API de Google-images qui n'autorise que quelques requetes par jour). Ceci est réalisé a travers une fonction implémentée dans ServerCrudWithMongo qui permet de modifier le champs url du restaurant en question.
 
-`app.put('/api/restaurant/:id', multerData.fields([]), (req, res) => {
+`app.put(/api/restaurant/:id, multerData.fields([]), (req, res) => {
     var id = req.params.id;
 
     mongoDBModule.updateURL(id, req.body)
@@ -100,10 +100,10 @@ Il existe sur chaque ligne de la table une icone qui,lorqu'elle est appuyée, pe
  
  
  **Lien de notre petite vidéo youtube qui montre un aspect remarquable de notre projet** :  
- (https://youtu.be/cmZMTskogzk)
+ https://youtu.be/cmZMTskogzk
   
 
 
-**Lien d'une vidéo démonstrative des fonctionnalités de projet** :  
- <img src="https://youtu.be/ajPPclwajE0"/>
+**Lien d'une vidéo démonstrative des fonctionnalités de projet (optionnelle)** :  
+ https://youtu.be/ajPPclwajE0
 
